@@ -24,7 +24,7 @@ class No(val i: Int, val prox: No?) {
         }else {
             false
         }
-
+	//Questão 04
     fun size(n: No?):Int =
         if(n == null)
             0
@@ -73,13 +73,45 @@ class No(val i: Int, val prox: No?) {
              else
                  No(n.i, remover(n.prox, posicao-1))
             }
-
-
-
-
-
-
-
-
+    
+    //Questão 01        
+     fun ultimoElemento(n: No?): Int?=
+     	if(n != null){
+        if(n.prox == null)
+        n.i
+    	else
+    	ultimoElemento(n.prox)
+        }else
+    	null
+	
+    //Questão 02
+    fun penultimoElemento(n: No?): Int?=
+        if(n != null){
+			if(n.prox?.prox == null)
+            n.i
+            else
+            penultimoElemento(n.prox)
+        }else
+    	null
+    
+    //Questão 03
+    fun elementoPosicao(n: No?, posicao: Int): Int?=
+        if(n!=null){
+            if(posicao == 1)
+            n.i
+            else
+            elementoPosicao(n.prox, posicao-1)
+        }else
+    	null
+	
+    //Questão 05
+    fun inverterLista(n: No?): No?=
+        if(n != null){
+            if(n.size(n) == 2)
+            
+            else
+            inverterLista(n.prox)
+        }else
+    	null
 }
 
