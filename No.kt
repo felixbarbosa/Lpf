@@ -104,14 +104,11 @@ class No(val i: Int, val prox: No?) {
         }else
     	null
 	
-    //Questão 05
-    fun inverterLista(n: No?): No?=
-        if(n != null){
-            if(n.size(n) == 2)
-            
-            else
-            inverterLista(n.prox)
-        }else
+     //Questão 05
+	fun inverterLista(n: No?): No?=
+        if(n != null)
+        concatenar(inverterLista(n.prox),No(n.i, null))
+        else
     	null
 }
 
