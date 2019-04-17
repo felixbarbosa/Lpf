@@ -1,0 +1,79 @@
+class No(val i: Int, val prox: No?)
+
+fun imprimir(n: No?){
+        if(n!=null){
+            print(n.i)
+            imprimir(n.prox)
+        }
+    }
+
+/*fun incrementar(n: No?): No?=
+    if(n == null)
+    null
+	else
+	No(n.i +1, incrementar(n.prox))
+*/
+
+fun map (n: No?, f:(Int) -> Int): No?=
+    if(n==null)
+    null
+	else
+	No(f(n.i), map(n.prox,f))
+    
+fun filter(n: No?, f:(Int)->Boolean): No?=
+    if(n==null)
+    null
+	else if(f(n.i))
+    No(n.i, filter(n.prox, f))
+    else
+	filter(n.prox, f)
+ 
+ fun reduz(n:No?, v0:Int, o:(Int, Int)->Int):Int=
+    if(n==null)
+    v0
+	else
+	o(n.i, reduz(n.prox,v0,o))
+    
+ fun incr(n: No?)= map(n, {x->x+1})   
+ fun decr(n:No?)= map(n, {x->x-1})
+ fun mult2(n:No?)= map(n, {x->x*2})
+ fun pares(n:No?)= filter(n, {x->x%2==0})
+ fun impares(n:No?)= filter(n,{x->x%2!=0})
+ fun somarValores(n:No?)= reduz(n, 0,{x,y->x+y})
+ fun multiplicarValores(n:No?)= reduz(n, 1,{x,y->x*y})
+
+/*fun pares(n: No?): No?=
+    if(n != null){
+    	if(n.i%2 == 0)
+    	No(n.i, pares(n.prox))
+		else
+		pares(n.prox)
+	}else
+	null*/
+    
+/*fun impares(n: No?): No?=
+    if(n != null){
+    	if(n.i%2 != 0)
+    	No(n.i, impares(n.prox))
+		else
+		impares(n.prox)
+	}else
+	null*/   
+    
+  /*fun somarValores(n:No?): Int=
+    if(n!=null){
+        if(n.prox == null)
+        n.i
+        else
+        somarValores(n.prox) + n.i
+    }else
+	0*/
+    
+/* fun multiplicarValores(n:No?): Int=
+    if(n!=null){
+        if(n.prox == null)
+        n.i
+        else
+        multiplicarValores(n.prox) * n.i
+    }else
+	1*/
