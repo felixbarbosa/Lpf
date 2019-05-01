@@ -85,14 +85,14 @@ fun <T> penultimoElemento(n: NoQuestoes<T>?): T?=
 
 
 //Mostre o elemento que esta na determinada posição de uma lista
-fun <T> elementoPosicao(n: NoQuestoes<T>?, posicao: Int): T?=
+fun elementoPosicao(n: NoQuestoes<Int>?, posicao: Int): Int=
     if(n!=null){
-        if(posicao == 1)
+        if(posicao == 0)
             n.i
         else
             elementoPosicao(n.prox, posicao-1)
     }else
-        null
+        0
 
 
 //Inverta uma lista
@@ -217,7 +217,7 @@ fun <T> dividir_Lista(n: NoQuestoes<T>?, valor: Int): NoQuestoes<T>?=
         }
 
 
-fun rodar_Esquerda(n: NoQuestoes<Int>?, valor: Int): NoQuestoes<Int>?=
+/*fun rodar_Esquerda(n: NoQuestoes<Int>?, valor: Int): NoQuestoes<Int>?=
         if(n==null)
             null
         else{
@@ -225,22 +225,63 @@ fun rodar_Esquerda(n: NoQuestoes<Int>?, valor: Int): NoQuestoes<Int>?=
                 n
             else
                 concatenar(rodar_Esquerda(n.prox,valor-1),null)
+        }*/
+
+
+
+//Receba uma string qualquer e retorne outra string onde todas as letras
+//são maiúsculas.
+fun minunuscula_Para_Maiuscula(c: String): String=
+		varrer_String(c,0)
+			
+fun varrer_String(c: String, aux: Int): String=
+		if(c.length > aux){
+            if(c.get(aux)>='a' && c.get(aux)<='z')
+            "${c.get(aux)-32}${varrer_String(c,aux+1)}"
+            else
+            "${c.get(aux)}${varrer_String(c,aux+1)}"
         }
-
-/*fun minunuscula_Para_Maiuscula(c: String): Unit=
-        if(c.get(0)<= 122.toChar() && c.get(0)>= 97.toChar()) {
-            print(c.get(0) - 32)
-
-        }else{
-           print(c)
-            }*/
+		else
+			""
 
 
+//Receba uma lista qualquer e uma lista de posições, retorne uma lista com os
+//elementos da primeira que estavam nas posições indicadas.
+fun seleciona_Posicoes(n: NoQuestoes<Int>?, posicao: NoQuestoes<Int>?): NoQuestoes<Int>?=
+		if(n==null||posicao==null)
+			null
+		else
+            NoQuestoes(elementoPosicao(n,posicao.i),seleciona_Posicoes(n,posicao.prox))
 
-fun main(args: Array<String>){
+
+//Receba um numero e retorne a soma dos seus digitos.
+fun soma_Digitos(numero: Int): Int=
+		if(numero>0)
+			numero%10 + soma_Digitos(numero/10)
+		else
+			0
+
+
+//Verifique se o numero é primo
+fun isPrimo(valor: Int): Boolean=
+	isPrimo_Aux(valor,2)
+
+fun isPrimo_Aux(valor: Int, aux: Int): Boolean=
+	if(valor>aux){
+		if(valor%aux==0)
+			false
+		else
+			isPrimo_Aux(valor, aux+1)
+    }else
+		true
+
+
+
+            
+ fun main(args: Array<String>){
     val lista = NoQuestoes(1, NoQuestoes( 3, NoQuestoes(4, NoQuestoes(5,null))))
     val lista2 = NoQuestoes(9,NoQuestoes(5,NoQuestoes(15,NoQuestoes(9,null))))
+    val posicao = NoQuestoes(1,NoQuestoes(0,NoQuestoes(2,null)))
 
-
-    //minunuscula_Para_Maiuscula("aBC")
+	print(minunuscula_Para_Maiuscula("viCtoR FeLix99"))
 }
